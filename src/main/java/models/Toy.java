@@ -7,11 +7,15 @@ public class Toy {
     private int amount;
     private int weight;
 
-    public Toy(int id, String title, int amount, int weight) {
-        this.id = id;
+    public Toy(String title, int amount, int weight) {
         this.title = title;
         this.amount = amount;
         this.weight = weight;
+    }
+
+    public Toy(int id, String title, int amount, int weight) {
+        this(title,amount,weight);
+        this.id = id;
     }
 
     public int getId() {
