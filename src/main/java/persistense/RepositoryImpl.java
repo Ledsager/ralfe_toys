@@ -7,22 +7,24 @@ import java.util.List;
 public class RepositoryImpl implements Repository{
 
     @Override
-    public Toy createNote() {
+    public Toy createToy() {
+
         return null;
     }
 
-    @Override
-    public Toy getNoteById() {
-        return null;
-    }
+//    @Override
+//    public Toy getNoteById() {
+//        return null;
+//    }
+
+//    @Override
+//    public List<Toy> getAllNotes() {
+//        return null;
+//    }
 
     @Override
-    public List<Toy> getAllNotes() {
-        return null;
-    }
+    public Toy updateToyWeight() {
 
-    @Override
-    public Toy delNote() {
         return null;
     }
 }
