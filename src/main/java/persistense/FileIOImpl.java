@@ -65,7 +65,7 @@ public class FileIOImpl implements FileIO{
 
 //    @Override
     public void saveWinToy(Toy toy, String pathResult) {
-        try (FileWriter writer = new FileWriter(pathResult, false)) {
+        try (FileWriter writer = new FileWriter(pathResult, true)) {
 //            for (Toy item : toy) {
                 writer.append(String.format("%d  ", toy.getId()));
                 writer.append(String.format("%s  ", toy.getTitle()));
