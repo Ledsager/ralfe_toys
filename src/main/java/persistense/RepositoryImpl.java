@@ -13,6 +13,7 @@ public class RepositoryImpl implements Repository{
     private ToyMapper mapper = new ToyMapper();
 
     public RepositoryImpl(FileIO fileOperation) {
+
         this.fileOperation = fileOperation;
     }
     @Override
@@ -30,10 +31,15 @@ public class RepositoryImpl implements Repository{
         saveToy(toy, id);
     }
     @Override
+    public void UpdateToyAmount(Toy toy, int id) {
+        toy.setAmount(toy.getAmount()-1);
+        saveToy(toy, id);
+    }
+    @Override
     public void saveToy(Toy toy, int id) {
         List<String> lines = new ArrayList<>();
         List<Toy> toys = getAllToys();
-        System.out.println(toy);
+//        System.out.println(toy);
         for (Toy item: toys) {
             if(id==item.getId()) {
                 lines.add(mapper.map(toy));
@@ -42,19 +48,15 @@ public class RepositoryImpl implements Repository{
                 lines.add(mapper.map(item));
             }
         }
-        System.out.println(lines);
+//        System.out.println(lines);
         fileOperation.saveAllLines(lines);
     }
-//    public void updateToy(Toy toy, int id, int weigth) throws Exception {
-//        if(field == Fields.TELEPHONE) {
-//            validate.checkNumber(param);
-//        }
-//        repository.UpdateUser(user, field, param);
+
     @Override
-    public Toy readToy(String ToyId) throws Exception {
+    public Toy readToy(int ToyId) throws Exception {
         List<Toy> toys = getAllToys();
         for (Toy toy : toys) {
-            if (String.format("%d", toy.getId()).equals(ToyId)) {
+            if (toy.getId() == ToyId) {
                 return toy;
             }
         }

@@ -2,7 +2,7 @@ package models;
 
 public class ToyMapper {
     public String map(Toy toy) {
-        return String.format("%s;%s;%s;%s", toy.getId(), toy.getTitle(), toy.getAmount(), toy.getWeight());
+        return String.format("%d;%s;%d;%d", toy.getId(), toy.getTitle(), toy.getAmount(), toy.getWeight());
     }
 
     public Toy map(String line) {

@@ -1,5 +1,7 @@
 package persistense;
 
+import models.Toy;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.io.*;
@@ -60,5 +62,23 @@ public class FileIOImpl implements FileIO{
             System.out.println(ex.getMessage());
         }
     }
+
+//    @Override
+    public void saveWinToy(Toy toy, String pathResult) {
+        try (FileWriter writer = new FileWriter(pathResult, false)) {
+//            for (Toy item : toy) {
+                writer.append(String.format("%d  ", toy.getId()));
+                writer.append(String.format("%s  ", toy.getTitle()));
+                writer.append(String.format("%d  ", toy.getAmount()));
+                writer.append(String.format("%d  ", toy.getWeight()));
+                writer.append("\n");
+                writer.flush();
+            } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+    }
+
+
 }
 
