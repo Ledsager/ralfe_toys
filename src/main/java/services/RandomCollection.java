@@ -21,13 +21,13 @@ public class RandomCollection<E> {
         if (weight <= 0) return this;
         total += weight;
         map.put(total, result);
-        System.out.println(map);
+//        System.out.println(map);
         return this;
     }
 
     public E next() {
         double value = random.nextDouble();
-        System.out.println(value);
+//        System.out.println(value);
         double value1 = value * total;
         return map.higherEntry(value1).getValue();
     }
