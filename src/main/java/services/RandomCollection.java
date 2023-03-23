@@ -21,20 +21,14 @@ public class RandomCollection<E> {
         if (weight <= 0) return this;
         total += weight;
         map.put(total, result);
-//        System.out.println(map);
-        return this;
-    }
-    public RandomCollection<E> del(double weight, E result) {
-//        if (weight <= 0) return this;
-//        total += weight;
-
-        map.remove(weight, result);
-//        System.out.println(map);
+        System.out.println(map);
         return this;
     }
 
     public E next() {
-        double value = random.nextDouble() * total;
-        return map.higherEntry(value).getValue();
+        double value = random.nextDouble();
+        System.out.println(value);
+        double value1 = value * total;
+        return map.higherEntry(value1).getValue();
     }
 }

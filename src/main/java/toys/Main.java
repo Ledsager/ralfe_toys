@@ -11,7 +11,6 @@ public class Main {
     public static void main(String[] args) {
         FileIO fileOperation = new FileIOImpl("toys.txt");
         FileIO fileOperation1 = new FileIOImpl("toys_win.txt");
-
         Repository repository = new RepositoryImpl(fileOperation);
 //        Validate validate = new Validate();
 //        UserController controller = new UserController(repository);

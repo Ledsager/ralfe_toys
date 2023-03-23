@@ -25,12 +25,13 @@ public class Console {
         }
 
         private void printMenu() {
-            System.out.println("1. Добавить новые игрушки");
+            System.out.println("1. Добавить новые игрушки в базу");
             System.out.println("2. Добавить игрушку в розыгрыш");
-            System.out.println("3. Игрушка для победителя");
-            System.out.println("4. Просмотреть все игрушки");
-            System.out.println("5. Изменить вес(вероятность выпадения) игрушки");
-            System.out.println("6. Выход из программы");
+            System.out.println("3. Очистить список розыгрыша игрушек");
+            System.out.println("4. Игрушка для победителя");
+            System.out.println("5. Просмотреть все игрушки в базе");
+            System.out.println("6. Изменить вес(вероятность выпадения) игрушки");
+            System.out.println("7. Выход из программы");
         }
 
         public void run() {
@@ -50,21 +51,25 @@ public class Console {
                                 listToyPlay();
                                 break;
                             case 3:
+                                listToyDel();
+                                break;
+
+                            case 4:
                                 winToyFile();
                                 break;
-                            case 4:
+                            case 5:
                                 list();
                                 break;
-                            case 5:
+                            case 6:
                                 update();
                                 break;
-                            case 6:
+                            case 7:
                                 System.out.println("Завершение программы...");
                                 break;
                             default:
                                 System.out.println("Вы ввели неверное значение меню...\n");
                         }
-                    } while (key != 6);
+                    } while (key != 7);
                 }
                 catch(Exception ex) {
                     System.out.println("Произошла ошибка " + ex.toString());
@@ -77,31 +82,40 @@ public class Console {
             toys.add(repository.readToy(id));
 
         }
-        private void winToyFile() throws Exception {
+        private void listToyDel(){
+            if (!toys.isEmpty()) {
+                System.out.println("Список очищен");
+                toys.clear();
+            }
+            else{
+                System.out.println("Список розыгрыша пуст");
+            }
 
-            for (Toy toy : toys) {
-//                System.out.println(toy);
-                if (toy.getAmount() > 0) {
+        }
+        private void winToyFile() throws Exception {
+            if (!toys.isEmpty()) {
+//                System.out.println("List is empty");
+                for (Toy toy : toys) {
                     rc.add(toy.getWeight(), toy.getId());
                 }
+                for (int i = 0; i < 1; i++) {
+                    //                System.out.println(rc.next());
+                    int idwin = (int) rc.next();
+
+                    Toy _toywin = repository.readToy(idwin);
+                    System.out.println(_toywin);
+
+                    if (_toywin.getAmount() > 0) {
+                        repository.UpdateToyAmount(_toywin, idwin);
+                        fileOperation1.saveWinToy(_toywin, "toys_win.txt");
+                        System.out.println(_toywin);
+                    }
+                    System.out.println(idwin);
+                }
             }
-            for (int i = 0; i < 1; i++) {
-//                System.out.println(rc.next());
-                    int idwin= (int) rc.next();
-
-                Toy _toywin = repository.readToy(idwin);
-                System.out.println(idwin);
-
-                repository.UpdateToyAmount(_toywin, idwin);
-                System.out.println(_toywin);
-
-                fileOperation1.saveWinToy(_toywin, "toys_win.txt");
-
-//                if (_toywin.getAmount() == 0){
-//                    System.out.println(_toywin);
-//                    rc.del(_toywin.getWeight(), idwin);
-//                }
-            }
+            else {
+                    System.out.println("Список розагрыша пуст");
+                }
 
         }
     private void update() throws Exception {
